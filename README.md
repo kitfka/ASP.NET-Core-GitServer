@@ -22,14 +22,14 @@ Need to install [Git](https://git-scm.com/) first, and make sure the git command
 - Create a repository
 - Browse the repository
 - git client: push pull
-- Supported Databases: SQLite、MSSQL、MySQL
+- Supported Databases: SQLite | MSSQL | MySQL
 - User support for repositories
 
 ## Development
 
 `git clone https://github.com/InfDev/GitServer.git`
 
-Use VS 2017 15.9+ or VS Code 1.28+。
+Use VS 2017 15.9+ or VS Code 1.28+
 
 ## working principle
 
