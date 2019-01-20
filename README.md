@@ -1,9 +1,8 @@
-﻿
-# GitServer
+﻿# GitServer
 
-ASP.NET Core 2.0开发Git HTTP Server
+Own ASP.NET Core 2.2 Git HTTP Server
 
-设置
+Setting
 
 ```
   "GitSettings": {
@@ -12,37 +11,29 @@ ASP.NET Core 2.0开发Git HTTP Server
   }
 ```
 
-需要先安装Git,并确保git 命令可以执行
+Need to install [Git](https://git-scm.com/) first, and make sure the git command can be executed
 
-GitPath 可以是 git 的绝对路径
+`git version`
 
-## 功能
+## Features
 
-### 已完成
+### Сompleted
 
-- 创建仓库
-- 浏览仓库
-- git客户端push pull
-- 数据库支持 SQLite、MSSQL、MySQL
-- 支持用户管理仓库
+- Create a repository
+- Browse the repository
+- git client: push pull
+- Supported Databases: SQLite、MSSQL、MySQL
+- User support for repositories
 
-### 待完成
+## Development
 
-- 仓库工单（Issue）
-- 合并请求（Pull Request）
-- 代码评审（Code Review）
-- 在线编辑
+`git clone https://github.com/InfDev/GitServer.git`
 
-## 开发
+Use VS 2017 15.9+ or VS Code 1.28+。
 
-`git clone https://github.com/linezero/GitServer.git`
+## working principle
 
-使用VS 2017 15.3+ 或者VS Code。
-
-
-## 原理
-
-git client => GitServer => git server
+git client → GitServer → git server
 
 ![](git-server-rpc-model.png)
 
