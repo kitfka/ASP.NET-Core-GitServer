@@ -6,7 +6,7 @@ Setting
 
 ```
   "GitSettings": {
-    "BasePath": "D:\\Git",
+    "BasePath": "E:\\GitServerRepos",
     "GitPath": "git"
   }
 ```
