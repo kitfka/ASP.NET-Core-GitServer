@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "快速帮助";
+    ViewBag.Title = "Quick help";
 
     string currRepo = (string)ViewContext.RouteData.Values["repoName"];
     string currUser = (string)ViewContext.RouteData.Values["userName"];
@@ -14,11 +14,11 @@
     <div class="ui grid">
         <div class="sixteen wide column content">
             <h4 class="ui top attached header">
-                快速帮助
+                Quick help
             </h4>
             <div class="ui attached guide table segment">
                 <div class="item">
-                    <h3>克隆当前仓库 <small>不知道如何操作？访问 <a href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository" rel="nofollow">此处</a> 查看帮助！</small></h3>
+                    <h3>Clone the current repository <small>Don't know how to do it? <a href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository" target="_blank" rel="nofollow">Here</a> view help！</small></h3>
                     <div class="ui fluid action small input">
                         <button class="ui basic clone button blue" id="repo-clone-https" data-link="@giturl">
                             HTTP
@@ -30,9 +30,9 @@
                 <div class="ui divider"></div>
 
                 <div class="item">
-                    <h3>从命令行创建一个新的仓库</h3>
+                    <h3>Create a new local repository from the command line (Windows)</h3>
                     <div class="markdown">
-                        <pre><code>touch README.md
+                        <pre><code>ren > README.md
 git init
 git add README.md
 git commit -m "first commit"
@@ -43,7 +43,7 @@ git push -u origin master</code></pre>
                 <div class="ui divider"></div>
 
                 <div class="item">
-                    <h3>从命令行推送已经创建的仓库</h3>
+                    <h3>Push the created local repository from the command line</h3>
                     <div class="markdown">
                         <pre><code>git remote add origin <span class="clone-url">@giturl</span>
 git push -u origin master</code></pre>

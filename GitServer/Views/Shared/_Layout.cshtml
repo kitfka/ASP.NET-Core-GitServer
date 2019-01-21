@@ -21,17 +21,17 @@
                             <a class="item brand" href="/">
                                 <img src="/img/logo_white.svg" alt="GitServer" class="logo-image" />
                             </a>
-                            <a class="item" href="/">首页</a>
-                            <a class="item" href="#">探索</a>
+                            <a class="item" href="/">Home</a>
+                            <a class="item" href="#">Explore</a>
                             <div class="right menu">
                                 @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                                 {
                                     <a class="item" href="#">@ViewContext.HttpContext.User.Identity.Name</a>
-                                    <a class="item" href="/User/Signout">注销</a>
+                                    <a class="item" href="/User/Signout">Sign out</a>
                                 }
                                 else
                                 {
-                                    <a class="item" href="/User/Login">登录</a>
+                                    <a class="item" href="/User/Login">Sign in</a>
                                 }
                             </div>
                         </div>
@@ -50,14 +50,6 @@
             </div>
             <div class="ui right links">
                 <a target="_blank" href="https://github.com/InfDev/GitServer">InfDev/GitHub</a>
-            </div>
-        </div>
-        <div class="ui container">
-            <div class="ui left">
-                LineZero © 2017 GitServer 0.1
-            </div>
-            <div class="ui right links">
-                <a target="_blank" href="https://github.com/linezero/GitServer">linezero/GitHub</a>
             </div>
         </div>
     </footer>
