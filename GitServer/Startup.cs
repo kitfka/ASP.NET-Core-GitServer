@@ -1,21 +1,19 @@
-﻿using GitServer.Services;
-using GitServer.Settings;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using GitServer.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
+using GitServer.Infrastructure;
+using GitServer.Services;
+using GitServer.Settings;
 using GitServer.Handlers;
 using GitServer.ApplicationCore.Interfaces;
-using NetCoreBBS.Infrastructure.Repositorys;
 using GitServer.ApplicationCore.Models;
+using GitServer.Infrastructure.Repositories;
 
 namespace GitServer
 {
@@ -94,6 +92,7 @@ namespace GitServer
 			{
 				app.UseExceptionHandler("/error");
 			}
+
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc(routes => RouteConfig.RegisterRoutes(routes));
