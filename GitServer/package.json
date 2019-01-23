@@ -1,0 +1,23 @@
+{
+  "name": "gitserver",
+  "version": "0.2.0",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-newer": "^1.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "InfDev",
+  "license": "MIT"
+}

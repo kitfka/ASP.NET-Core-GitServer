@@ -1,0 +1,21 @@
+{
+  "name": "gitserver",
+  "homepage": "https://github.com/InfDev/GitServer",
+  "authors": [
+    "InfDev <alex.shlyakhto@gmail.com>"
+  ],
+  "description": "Own HTTP GitServer",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic": "semantic-ui#^2.4.1"
+  }
+}
