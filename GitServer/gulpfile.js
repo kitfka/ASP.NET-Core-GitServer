@@ -111,6 +111,7 @@ function extLibs() {
 	app.addExtLibAsIs("./assets/lib/highlightjs/*", "./wwwroot/lib/highlightjs/");	
 	app.addExtLibAsIs("./assets/lib/highlightjs/styles/foundation.css", "./wwwroot/lib/highlightjs/styles/");	
 	app.addExtLibAsIs("./assets/lib/highlightjs/styles/github.css", "./wwwroot/lib/highlightjs/styles/");	
+	app.addExtLibAsIs("./assets/lib/highlightjs-line-numbers/dist/**/*", "./wwwroot/lib/highlightjs-line-numbers/dist/");	
 }
 
 function css() {

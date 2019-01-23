@@ -14,17 +14,19 @@
 }
 else
 {
-    <pre>@Model.Content</pre>
+    <pre><code>@Model.Content</code></pre>
     //Html.HighlightCode(Model.Content, Highlighter.FromExtension(System.IO.Path.GetExtension(Model.Name)), "code")
 }
 
 @section Scripts {
     <script src="~/lib/highlightjs/highlight.pack.js"></script>
+    <script src="~/lib/highlightjs-line-numbers/dist/highlightjs-line-numbers.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script>
         $(document).ready(function () {
             $('pre').each(function (i, block) {
-                hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
+                // hljs.highlightBlock(block);
             });
         });
     </script>
