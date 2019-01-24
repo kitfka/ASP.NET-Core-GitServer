@@ -83,6 +83,7 @@ namespace GitServer
 			services.AddTransient<GitFileService>();
             services.AddTransient<IRepository<User>, Repository<User>>();
             services.AddTransient<IRepository<Repository>, Repository<Repository>>();
+            services.AddSingleton<Helpers.IHighlightJsMapper, Helpers.HighlightJsMapper>();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

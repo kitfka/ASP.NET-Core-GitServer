@@ -1,0 +1,167 @@
+[
+  {
+    "ext": ".sh",
+    "cls": "bash",
+    "name": "Bash shell script"
+  },
+  {
+    "ext": ".cs",
+    "cls": "csharp",
+    "name": "source code file"
+  },
+  {
+    "ext": ".cpp",
+    "cls": "cpp",
+    "name": "C++ source code file"
+  },
+  {
+    "ext": ".h",
+    "cls": "cpp",
+    "name": "C, C++, and Objective-C header file"
+  },
+  {
+    "ext": ".c",
+    "cls": "cpp",
+    "name": "C and C++ source code file"
+  },
+  {
+    "ext": ".css",
+    "cls": "css",
+    "name": "Cascading Style Sheet file"
+  },
+  {
+    "ext": ".sass",
+    "cls": "scss",
+    "name": "Syntactically Awesome StyleSheets file"
+  },
+  {
+    "ext": ".scss",
+    "cls": "scss",
+    "name": "Cascading Style Sheet file"
+  },
+  {
+    "ext": ".coffee",
+    "cls": "coffee",
+    "name": "CoffeeScript JavaScript file"
+  },
+  {
+    "ext": ".diff",
+    "cls": "diff",
+    "name": "Patch file"
+  },
+  {
+    "ext": ".patch",
+    "cls": "diff",
+    "name": "Patch file"
+  },
+  {
+    "ext": ".html",
+    "cls": "html",
+    "name": "Hypertext Markup Language file"
+  },
+  {
+    "ext": ".htm",
+    "cls": "html",
+    "name": "Hypertext Markup Language file"
+  },
+  {
+    "ext": ".xml",
+    "cls": "xml",
+    "name": "Extensible Markup Language file"
+  },
+  {
+    "ext": ".haml",
+    "cls": "haml",
+    "name": "HTML abstraction markup language file"
+  },
+  {
+    "ext": ".ini",
+    "cls": "ini",
+    "name": "Configuration file"
+  },
+  {
+    "ext": ".json",
+    "cls": "json",
+    "name": "JavaScript Object Notation file"
+  },
+  {
+    "ext": ".java",
+    "cls": "java",
+    "name": "Java Source Code file"
+  },
+  {
+    "ext": ".jsp",
+    "cls": "jsp",
+    "name": "Java Server Page"
+  },
+  {
+    "ext": ".js",
+    "cls": "javascript",
+    "name": "JavaScript file"
+  },
+  {
+    "ext": ".makefile",
+    "cls": "makefile",
+    "name": "Makefile"
+  },
+  {
+    "ext": ".md",
+    "cls": "markdown",
+    "name": "Markdown Documentation file"
+  },
+  {
+    "ext": ".conf",
+    "cls": "nginxconf",
+    "name": "Unix Configuration file"
+  },
+  {
+    "ext": ".m",
+    "cls": "objectivec",
+    "name": ""
+  },
+  {
+    "ext": ".php",
+    "cls": "php",
+    "name": "PHP Source Code file"
+  },
+  {
+    "ext": ".pl",
+    "cls": "perl",
+    "name": "Perl script"
+  },
+  {
+    "ext": ".py",
+    "cls": "python",
+    "name": "Python script"
+  },
+  {
+    "ext": ".rb",
+    "cls": "ruby",
+    "name": "Ruby Source Code"
+  },
+  {
+    "ext": ".sql",
+    "cls": "sql",
+    "name": "Structured Query Language data file"
+  },
+  {
+    "ext": ".pas",
+    "cls": "pas",
+    "name": "Delphi Unit Source file"
+  },
+  {
+    "ext": ".dfm",
+    "cls": "dfm",
+    "name": "Delphi Form file"
+  },
+  {
+    "ext": ".dpr",
+    "cls": "dpr",
+    "name": "Delphi Project"
+  },
+  {
+    "ext": ".kt",
+    "cls": "kotlin",
+    "name": "Kotlin Source Code file"
+  }
+]

@@ -148,6 +148,10 @@ footer .ui .right {
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
+.ui.checkbox .box, .ui.checkbox label {
+    display: inline;
+}
+
 /* for block of numbers */
 .hljs-ln td.hljs-ln-numbers {
     -webkit-touch-callout: none;

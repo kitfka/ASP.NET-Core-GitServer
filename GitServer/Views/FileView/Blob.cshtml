@@ -1,6 +1,10 @@
-@using GitServer.Extensions
-@using GitServer.Models
-@using GitServer.SyntaxHighlighing
+@using System.IO;
+@using Microsoft.AspNetCore.Hosting;
+@using GitServer.Extensions;
+@using GitServer.Models;
+@inject IHostingEnvironment HostingEnvironment;
+@inject GitServer.Helpers.IHighlightJsMapper HighlightJsMapper;
+
 @model BlobModel
 
 @{
@@ -8,13 +12,17 @@
 }
 <link rel="stylesheet" href="~/lib/highlightjs/styles/foundation.css">
 
+@{
+    var ext = System.IO.Path.GetExtension(Model.Path);
+    var blockClass = HighlightJsMapper.Map(ext)?.HljsClass;
+}
 @if (Model.IsBinary)
 {
     <p>This file is binary and cannot be displayed.</p>
 }
 else
 {
-    <pre><code>@Model.Content</code></pre>
+    <pre><code class='@blockClass'>@Model.Content</code></pre>
     //Html.HighlightCode(Model.Content, Highlighter.FromExtension(System.IO.Path.GetExtension(Model.Name)), "code")
 }
 
@@ -24,7 +32,7 @@ else
     <script>hljs.initHighlightingOnLoad();</script>
     <script>
         $(document).ready(function () {
-            $('pre').each(function (i, block) {
+            $('pre code').each(function (i, block) {
                 hljs.lineNumbersBlock(block);
                 // hljs.highlightBlock(block);
             });

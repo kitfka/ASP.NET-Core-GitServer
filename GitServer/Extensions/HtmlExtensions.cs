@@ -18,7 +18,7 @@ namespace GitServer.Extensions
 {
 	public static class HtmlExtensions
     {
-		public static IHtmlContent HighlightCode(this IHtmlHelper helper, string text, Highlighter highlighter, string cssClass = null)
+        public static IHtmlContent HighlightCode(this IHtmlHelper helper, string text, Highlighter highlighter, string cssClass = null)
 		{
 			TagBuilder rootTag = new TagBuilder("pre");
 
