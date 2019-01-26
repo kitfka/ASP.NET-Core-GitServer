@@ -6,7 +6,7 @@
 <h2 class="ui header">Repositories</h2>
 <div class="right">
     <a href="/Home/Create">
-        <button class="ui teal right labeled icon button"><i class="right arrow icon"></i>Create</button>
+        <div class="ui teal labeled icon button"><i class="folder outline icon"></i>New</div>
     </a>
 </div>
 <div class="ui relaxed divided list">
@@ -17,7 +17,7 @@
             <div class="content">
                 @Html.RouteLink(repo.Name, "GetRepositoryHomeView", new { userName = repo.UserName, repoName = repo.Name }, new { @class = "header medium ui" })
                 <div class="description">@repo.Description</div>
-                <div class="description">Updated @repo.UpdateTime</div>
+                <div class="description">Updated @repo.UpdateTime, created @repo.CreationDate</div>
             </div>
         </div>
     }

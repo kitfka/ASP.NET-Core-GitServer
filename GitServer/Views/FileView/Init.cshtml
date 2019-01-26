@@ -23,33 +23,59 @@
                         <button class="ui basic clone button blue" id="repo-clone-https" data-link="@giturl">
                             HTTP
                         </button>
-                        <input type="text" value="@giturl" readonly>
-                        <button class="ui teal right labeled icon button"><i class="copy icon"></i> Copy</button>
+                        <input id="inputGitUrl" type="text" value="@giturl" readonly>
+                        <button id="btnCopyToClipboard" class="ui teal right labeled icon button"><i class="copy icon"></i> Copy</button>
+                    </div>
+                    <br />
+                    <div class="markdown">
+                        <h3>Clone the project to the local repository in the folder of your projects</h3>
+                        <pre><code>git clone @giturl
+cd @currRepo
+git remote -v
+git status</code></pre>
                     </div>
                 </div>
                 <div class="ui divider"></div>
 
                 <div class="item">
-                    <h3>Create a new local repository from the command line (Windows)</h3>
+                    <h3>Create a new local repository and link with the repository on the server</h3>
+                    <div class="markdown">
+                        <pre><code>git init
+git remote add origin <span class="clone-url">@giturl</span>
+git remote -v
+</code></pre>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+
+                <div class="item">
+                    <h3>Add files to local repository and push to remote repository</h3>
                     <div class="markdown">
                         <pre><code>ren > README.md
-git init
+git status
 git add README.md
+git status
 git commit -m "first commit"
-git remote add origin <span class="clone-url">@giturl</span>
-git push -u origin master</code></pre>
-                    </div>
-                </div>
-                <div class="ui divider"></div>
-
-                <div class="item">
-                    <h3>Push the created local repository from the command line</h3>
-                    <div class="markdown">
-                        <pre><code>git remote add origin <span class="clone-url">@giturl</span>
-git push -u origin master</code></pre>
+git status
+git push -u origin master
+git status</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts {
+<script>
+    function gitUrlToClipboard() {
+        const copyText = document.getElementById("inputGitUrl");
+        copyText.select();
+        document.execCommand("copy");
+    }
+
+    $(function () {
+        const el = document.getElementById("btnCopyToClipboard");
+        el.addEventListener("click", gitUrlToClipboard, false);
+    });
+</script>
+}
