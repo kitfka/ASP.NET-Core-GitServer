@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.2.2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\highlight\highlight.pack.js" />

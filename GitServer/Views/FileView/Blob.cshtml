@@ -1,5 +1,6 @@
 @using System.IO;
 @using Microsoft.AspNetCore.Hosting;
+@using Westwind.AspNetCore.Markdown;
 @using GitServer.Extensions;
 @using GitServer.Models;
 @inject IHostingEnvironment HostingEnvironment;
@@ -13,19 +14,30 @@
 <link rel="stylesheet" href="~/lib/highlightjs/styles/foundation.css">
 
 @{
-    var ext = System.IO.Path.GetExtension(Model.Path);
+    var ext = System.IO.Path.GetExtension(Model.Path).ToLower();
     var blockClass = HighlightJsMapper.Map(ext)?.HljsClass;
 }
-@if (Model.IsBinary)
-{
-    <p>This file is binary and cannot be displayed.</p>
+<div class="ui clearing segment">
+    File: <strong>@Model.Path</strong>
+</div>
+@{
+    if (Model.IsBinary)
+    {
+        <p>This file is binary and cannot be displayed.</p>
+    }
+    else
+    {
+        if (ext == ".md")
+        {
+            <div>@Markdown.ParseHtmlString(Model.Content)</div>
+        }
+        else
+        {
+            <pre><code class='@blockClass'>@Model.Content</code></pre>
+            //Html.HighlightCode(Model.Content, Highlighter.FromExtension(System.IO.Path.GetExtension(Model.Name)), "code")
+        }
+    }
 }
-else
-{
-    <pre><code class='@blockClass'>@Model.Content</code></pre>
-    //Html.HighlightCode(Model.Content, Highlighter.FromExtension(System.IO.Path.GetExtension(Model.Name)), "code")
-}
-
 @section Scripts {
     <script src="~/lib/highlightjs/highlight.pack.js"></script>
     <script src="~/lib/highlightjs-line-numbers/dist/highlightjs-line-numbers.min.js"></script>
