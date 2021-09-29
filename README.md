@@ -1,6 +1,6 @@
 ﻿# GitServer
 
-Own ASP.NET Core 2.2 Git HTTP Server
+Own ASP.NET Core 5.0 Git HTTP Server
 
 Setting
 
