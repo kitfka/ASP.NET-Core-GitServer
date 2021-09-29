@@ -1,51 +1,36 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Globalization;
+﻿using GitServer.Services;
+using GitServer.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using GitServer.Infrastructure;
-using GitServer.Services;
-using GitServer.Settings;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using GitServer.Handlers;
 using GitServer.ApplicationCore.Interfaces;
-using GitServer.ApplicationCore.Models;
 using GitServer.Infrastructure.Repositories;
+using GitServer.ApplicationCore.Models;
+using Microsoft.Extensions.Hosting;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace GitServer
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddConfiguration(Configuration.GetSection("Logging"));
-                loggingBuilder.AddConsole();
-                loggingBuilder.AddDebug();
-            });
-
             var connectionType = Configuration.GetConnectionString("ConnectionType");
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             switch (connectionType)
@@ -63,27 +48,30 @@ namespace GitServer
                     services.AddDbContext<GitServerContext>(options => options.UseSqlite(connectionString));
                     break;
             }
+
             // Add framework services.
-            services.AddMvc();
-			services.AddOptions();
+            services.AddMvc(option => {
+                option.EnableEndpointRouting = false;
+            });
+
+            services.AddOptions();
 
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options=> {
+            }).AddCookie(options => {
                 options.AccessDeniedPath = "/User/Login";
                 options.LoginPath = "/User/Login";
             }).AddBasic();
 
             // Add settings
             services.Configure<GitSettings>(Configuration.GetSection(nameof(GitSettings)));
-			// Add git services
-			services.AddTransient<GitRepositoryService>();
-			services.AddTransient<GitFileService>();
+            // Add git services
+            services.AddTransient<GitRepositoryService>();
+            services.AddTransient<GitFileService>();
             services.AddTransient<IRepository<User>, Repository<User>>();
             services.AddTransient<IRepository<Repository>, Repository<Repository>>();
-            services.AddSingleton<Helpers.IHighlightJsMapper, Helpers.HighlightJsMapper>();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -100,27 +88,33 @@ namespace GitServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             InitializeGitServerDatabase(app.ApplicationServices);
-			if(env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/error");
-			}
-
-            //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization
-            //https://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx
-            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(locOptions.Value);
-
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc(routes => RouteConfig.RegisterRoutes(routes));
-		}
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
+
+        }
+
         private void InitializeGitServerDatabase(IServiceProvider serviceProvider)
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())

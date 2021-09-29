@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GitServer.Controllers
@@ -21,6 +22,11 @@ namespace GitServer.Controllers
 
 		public async Task ExecuteResultAsync(ActionContext context)
 		{
+			var httpBodyControlFeature = context.HttpContext.Features.Get<IHttpBodyControlFeature>();
+			if (httpBodyControlFeature != null)
+			{
+				httpBodyControlFeature.AllowSynchronousIO = true;
+			}
 			HttpResponse response = context.HttpContext.Response;
 			Stream responseStream = GetOutputStream(context.HttpContext);
 

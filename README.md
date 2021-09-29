@@ -11,6 +11,8 @@ Setting
   }
 ```
 
+GitPath can be an absolute path to git like в Windows: **C:\Program Files\Git\bin\git.exe**
+
 Need to install [Git](https://git-scm.com/) first, and make sure the git command can be executed
 
 `git version`
