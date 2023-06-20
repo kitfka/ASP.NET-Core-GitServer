@@ -2,6 +2,7 @@
 using GitServer.Extensions;
 using GitServer.Models;
 using LibGit2Sharp;
+using System.Linq;
 
 namespace GitServer.Helpers;
 
@@ -23,7 +24,33 @@ public static class AnotherHelper
                 result = commit.Message;
             }
         }
+        //repo.Commits.TraverseTree(
+        //    x => x.Where(
+        //        y => y.Tree.Where(
+        //            z => z.Target.Id == fvm.Object.Id
+        //            ).FirstOrDefault()
+        //        ).FirstOrDefault()
+        //    );
 
+        // THIS IS BAD DUM AND SLOW i think
+
+        foreach (var commit in repo.Commits)
+        {
+            foreach (var item in commit.Tree)
+            {
+                if (item.Target == fvm.Object)
+                {
+                    result = commit.Message;
+                    break;
+                }
+            }
+        }
+        if (string.IsNullOrEmpty(result))
+        {
+            result = "WTF";
+        }
+
+        //repo.
 
         return result;
     }
