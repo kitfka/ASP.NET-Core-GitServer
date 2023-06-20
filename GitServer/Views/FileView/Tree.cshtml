@@ -25,10 +25,10 @@
 <div class="ui segment" id="git-stats">
     <div class="ui two horizontal center link list">
         <div class="item">
-            <a href="#"><span class="ui text black"><i class="icon history"></i> <b>@repo.Commits.Count()</b> commits</span> </a>
+            <a href="#"><span class="ui text black"><i class="icon git"></i><b>@repo.Branches.Count()</b> branches</span> </a>
         </div>
         <div class="item">
-            <a href="#"><span class="ui text black"><i class="icon git"></i><b>@repo.Branches.Count()</b> branches</span> </a>
+            <a href="#"><span class="ui text black"><i class="icon history"></i> <b>@repo.Commits.Count()</b> commits</span> </a>
         </div>
         <div class="item">
             <a href="#"><span class="ui text black"><i class="icon tag"></i> <b>0</b> releases</span> </a>
@@ -61,7 +61,8 @@
             bool isTree = fvm.Type == ObjectType.Tree;
             <tr>
                 <td class="collapsing"><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "GetTreeView" : "GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name</a></td>
-                <td>@lastcommit.MessageShort</td>
+                @*<td>@lastcommit.MessageShort</td>*@
+                <td>@GitServer.Helpers.AnotherHelper.Spike(repo, fvm)</td>
                 <td class="right aligned collapsing">@lastcommit.Committer.When.ToString("yyyy-MM-dd HH:mm:ss")</td>
             </tr>
         }
