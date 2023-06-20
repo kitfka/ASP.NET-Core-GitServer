@@ -15,6 +15,7 @@
 }
 <div class="ui clearing segment">
     <h3 class="ui left floated header">@currUser / @currRepo</h3>
+    @*<h4 class="ui left floated header">@repo.Branches</h4>*@
 </div>
 <h2>Contents of @Model.Name</h2>
 <div class="ui fluid action input">
@@ -51,7 +52,8 @@
             <tr>
                 <td class="collapsing"><i class="folder icon"></i><a href="@Url.UnencodedRouteLink("GetTreeView", new { repoName = currRepo, id = currId, path = Model.Parent })">..</a></td>
                 <td>Initial commit</td>
-                <td class="right aligned collapsing">10 hours ago</td>
+                @*FIXME: Dit is niet correct!*@
+                <td class="right aligned collapsing">10 hours ago!</td>
             </tr>
         }
         @foreach (FileViewModel fvm in Model.Children)

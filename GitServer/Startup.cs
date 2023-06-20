@@ -16,6 +16,7 @@ using GitServer.ApplicationCore.Models;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using GitServer.Helpers;
 
 namespace GitServer
 {
@@ -72,6 +73,9 @@ namespace GitServer
             services.AddTransient<GitFileService>();
             services.AddTransient<IRepository<User>, Repository<User>>();
             services.AddTransient<IRepository<Repository>, Repository<Repository>>();
+
+            // My thing
+            services.AddTransient<IHighlightJsMapper, HighlightJsMapper>();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

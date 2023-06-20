@@ -6,6 +6,7 @@
     string currId = (string)ViewContext.RouteData.Values["id"];
     var request = ViewContext.HttpContext.Request;
     var giturl = $"{request.Scheme}://{request.Host}/{currUser}/{currRepo}.git";
+    string defaultBranch = GitServer.Constants.DefaultBranch;
 }
 <div class="ui clearing segment">
     <h3 class="ui left floated header">@currUser / @currRepo</h3>
@@ -57,7 +58,7 @@ git add README.md
 git status
 git commit -m "first commit"
 git status
-git push -u origin master
+git push -u origin @defaultBranch
 git status</code></pre>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ namespace GitServer
 			routeBuilder.MapRoute(
 				"GetRepositoryHomeView",
                 "{userName}/{repoName}",
-				new { controller = "FileView", action = "GetTreeView", id = "master", path = string.Empty },
+				new { controller = "FileView", action = "GetTreeView", id = Constants.DefaultBranch, path = string.Empty },
 				new { method = new HttpMethodRouteConstraint("GET") }
 			);
 
