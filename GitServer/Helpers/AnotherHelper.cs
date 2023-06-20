@@ -8,6 +8,15 @@ namespace GitServer.Helpers;
 
 public static class AnotherHelper
 {
+
+    /// <summary>
+    /// A temp method to retrieve last commit message of a FileViewModel.
+    /// Now we will need to retrieve the other one!
+    /// Also might not work when not in the first tree thingy!
+    /// </summary>
+    /// <param name="repo"></param>
+    /// <param name="fvm"></param>
+    /// <returns></returns>
     public static string Spike(LibGit2Sharp.Repository repo, FileViewModel fvm)
     {
 
@@ -17,20 +26,6 @@ public static class AnotherHelper
 
         string result = "";
 
-        foreach (var commit in repo.Commits)
-        {
-            if (commit.Id == fvm.Object.Id)
-            {
-                result = commit.Message;
-            }
-        }
-        //repo.Commits.TraverseTree(
-        //    x => x.Where(
-        //        y => y.Tree.Where(
-        //            z => z.Target.Id == fvm.Object.Id
-        //            ).FirstOrDefault()
-        //        ).FirstOrDefault()
-        //    );
 
         // THIS IS BAD DUM AND SLOW i think
 
