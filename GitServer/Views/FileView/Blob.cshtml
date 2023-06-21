@@ -10,6 +10,12 @@
 
 @{
     ViewBag.Title = Model.Name;
+    string currRepo = (string)ViewContext.RouteData.Values["repoName"];
+    string currUser = (string)ViewContext.RouteData.Values["userName"];
+    string currId = (string)ViewContext.RouteData.Values["id"];
+    var request = ViewContext.HttpContext.Request;
+    string rawPath = $"{request.Scheme}://{request.Host}/{currUser}/{currRepo}/raw/{currId}/{Model.Path}";
+    string backPath = $"{request.Scheme}://{request.Host}/{currUser}/{currRepo}/tree/{currId}/{System.IO.Path.GetDirectoryName(Model.Path)}";
 }
 <link rel="stylesheet" href="~/lib/highlightjs/styles/foundation.css">
 
@@ -17,8 +23,10 @@
     var ext = System.IO.Path.GetExtension(Model.Path).ToLower();
     var blockClass = HighlightJsMapper.Map(ext)?.HljsClass;
 }
-<div class="ui clearing segment">
+<div class="w3-card w3-theme w3-padding">
     File: <strong>@Model.Path</strong>
+    <a class="w3-btn w3-theme-action" href="@rawPath">Raw</a>
+    <a class="w3-btn w3-theme-action" href="@backPath">back</a>
 </div>
 @{
     if (Model.IsBinary)

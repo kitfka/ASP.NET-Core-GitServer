@@ -107,7 +107,8 @@ public class FileViewController : GitControllerBase
             if (commit == null)
                 return NotFound();
 
-            TreeEntry entry = commit[path.Replace('/', Path.DirectorySeparatorChar)];
+            //TreeEntry entry = commit[path.Replace('/', Path.DirectorySeparatorChar)]; // this failed, why was this ever done?
+            TreeEntry entry = commit[path];
             if (entry == null)
                 return NotFound();
 
