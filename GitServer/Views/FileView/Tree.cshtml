@@ -61,18 +61,40 @@
                 <td class="w3-right-align"></td>
             </tr>
         }
+        @*Yesss, this is bad, but also easy!*@
         @foreach (FileViewModel fvm in Model.Children)
         {
-            bool isTree = fvm.Type == ObjectType.Tree;
+            @if (fvm.Type == ObjectType.Tree)
+            {
+                
             <tr>
-                <td class=""><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "GetTreeView" : "GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name@((isTree) ? "/" : "")</a></td>
+                <td class=""><a href="@Url.UnencodedRouteLink("GetTreeView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name /</a></td>
                 <td>@GitServer.Helpers.AnotherHelper.GetMessage(repo, fvm)</td>
                 <td class="w3-right-align">@GitServer.Helpers.AnotherHelper.GetTimeStamp(repo, fvm)</td>
             </tr>
+            }
+        }
+        @foreach (FileViewModel fvm in Model.Children)
+        {
+            @if (fvm.Type != ObjectType.Tree)
+            {
+                bool isTree = false;
+                <tr>
+                    <td class=""><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "GetTreeView" : "GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name@((isTree) ? "/" : "")</a></td>
+                    <td>@GitServer.Helpers.AnotherHelper.GetMessage(repo, fvm)</td>
+                    <td class="w3-right-align">@GitServer.Helpers.AnotherHelper.GetTimeStamp(repo, fvm)</td>
+                </tr>
+            }
         }
     </table>
 </div>
-
+       
+@*bool isTree = fvm.Type == ObjectType.Tree;
+<tr>
+    <td class=""><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "GetTreeView" : "GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name@((isTree) ? "/" : "")</a></td>
+    <td>@GitServer.Helpers.AnotherHelper.GetMessage(repo, fvm)</td>
+    <td class="w3-right-align">@GitServer.Helpers.AnotherHelper.GetTimeStamp(repo, fvm)</td>
+</tr>*@
 
 <div id="Issues" class="w3-container tab" style="display:none">
     <h2>Issues</h2>
