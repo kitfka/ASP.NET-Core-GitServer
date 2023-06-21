@@ -1,9 +1,6 @@
-﻿using GitServer.ApplicationCore.Models;
-using GitServer.Extensions;
-using GitServer.Models;
+﻿using GitServer.Models;
 using LibGit2Sharp;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace GitServer.Helpers;
@@ -79,7 +76,7 @@ public static class AnotherHelper
         // We no longer need this XD
         List<string> result = new();
 
-        string[] split = path.Split('/'); 
+        string[] split = path.Split('/');
         StringBuilder sb = new();
 
         foreach (string s in split)

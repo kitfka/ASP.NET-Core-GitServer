@@ -1,98 +1,97 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Mvc;
 
-namespace GitServer.Controllers
+namespace GitServer.Controllers;
+
+public class GitCommandResult : IActionResult
 {
-    public class GitCommandResult : IActionResult
+    private string _gitPath;
+
+    public GitCommandOptions Options { get; set; }
+
+    public GitCommandResult(string gitPath, GitCommandOptions options)
     {
-		private string _gitPath;
+        _gitPath = gitPath;
+        Options = options;
+    }
 
-		public GitCommandOptions Options { get; set; }
+    public async Task ExecuteResultAsync(ActionContext context)
+    {
+        var httpBodyControlFeature = context.HttpContext.Features.Get<IHttpBodyControlFeature>();
+        if (httpBodyControlFeature != null)
+        {
+            httpBodyControlFeature.AllowSynchronousIO = true;
+        }
+        HttpResponse response = context.HttpContext.Response;
+        Stream responseStream = GetOutputStream(context.HttpContext);
 
-		public GitCommandResult(string gitPath, GitCommandOptions options)
-		{
-			_gitPath = gitPath;
-			Options = options;
-		}
+        string contentType = $"application/x-{Options.Service}";
+        if (Options.AdvertiseRefs)
+            contentType += "-advertisement";
 
-		public async Task ExecuteResultAsync(ActionContext context)
-		{
-			var httpBodyControlFeature = context.HttpContext.Features.Get<IHttpBodyControlFeature>();
-			if (httpBodyControlFeature != null)
-			{
-				httpBodyControlFeature.AllowSynchronousIO = true;
-			}
-			HttpResponse response = context.HttpContext.Response;
-			Stream responseStream = GetOutputStream(context.HttpContext);
+        response.ContentType = contentType;
 
-			string contentType = $"application/x-{Options.Service}";
-			if (Options.AdvertiseRefs)
-				contentType += "-advertisement";
+        response.Headers.Add("Expires", "Fri, 01 Jan 1980 00:00:00 GMT");
+        response.Headers.Add("Pragma", "no-cache");
+        response.Headers.Add("Cache-Control", "no-cache, max-age=0, must-revalidate");
 
-			response.ContentType = contentType;
+        ProcessStartInfo info = new(_gitPath, Options.ToString())
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
 
-			response.Headers.Add("Expires", "Fri, 01 Jan 1980 00:00:00 GMT");
-			response.Headers.Add("Pragma", "no-cache");
-			response.Headers.Add("Cache-Control", "no-cache, max-age=0, must-revalidate");
+        //info.Environment.Add("AUTH_USER", userName);
+        //info.Environment.Add("REMOTE_USER", userName);
+        //info.Environment.Add("GIT_COMMITTER_EMAIL", email);
 
-			ProcessStartInfo info = new ProcessStartInfo(_gitPath, Options.ToString())
-			{
-				UseShellExecute = false,
-				CreateNoWindow = true,
-				RedirectStandardInput = true,
-				RedirectStandardOutput = true,
-				RedirectStandardError = true
-			};
+        using (Process process = Process.Start(info))
+        {
+            GetInputStream(context.HttpContext).CopyTo(process.StandardInput.BaseStream);
 
-            //info.Environment.Add("AUTH_USER", userName);
-            //info.Environment.Add("REMOTE_USER", userName);
-            //info.Environment.Add("GIT_COMMITTER_EMAIL", email);
+            if (Options.EndStreamWithNull)
+                process.StandardInput.Write('\0');
+            process.StandardInput.Dispose();
 
-            using (Process process = Process.Start(info))
-			{
-				GetInputStream(context.HttpContext).CopyTo(process.StandardInput.BaseStream);
+            using (StreamWriter writer = new(responseStream))
+            {
+                if (Options.AdvertiseRefs)
+                {
+                    string service = $"# service={Options.Service}\n";
+                    writer.Write($"{service.Length + 4:x4}{service}0000");
+                    writer.Flush();
+                }
 
-				if (Options.EndStreamWithNull)
-					process.StandardInput.Write('\0');
-				process.StandardInput.Dispose();
+                process.StandardOutput.BaseStream.CopyTo(responseStream);
+            }
 
-				using (StreamWriter writer = new StreamWriter(responseStream))
-				{
-					if (Options.AdvertiseRefs)
-					{
-						string service = $"# service={Options.Service}\n";
-						writer.Write($"{service.Length + 4:x4}{service}0000");
-						writer.Flush();
-					}
+            process.WaitForExit();
+        }
+    }
 
-					process.StandardOutput.BaseStream.CopyTo(responseStream);
-				}
+    private Stream GetInputStream(HttpContext context)
+    {
+        return string.Equals(context.Request.Headers["Content-Encoding"], "gzip")
+            ? new GZipStream(context.Request.Body, CompressionMode.Decompress)
+            : context.Request.Body;
+    }
 
-				process.WaitForExit();
-			}
-		}
-
-		private Stream GetInputStream(HttpContext context)
-		{
-			return string.Equals(context.Request.Headers["Content-Encoding"], "gzip")
-				? new GZipStream(context.Request.Body, CompressionMode.Decompress)
-				: context.Request.Body;
-		}
-
-		private Stream GetOutputStream(HttpContext context)
-		{
-			string acceptEncoding;
-			if ((acceptEncoding = context.Request.Headers["Accept-Encoding"]) != null && acceptEncoding.Contains("gzip"))
-			{
-				context.Response.Headers.Add("Content-Encoding", "gzip");
-				return new GZipStream(context.Response.Body, CompressionMode.Compress);
-			}
-			return context.Response.Body;
-		}
-	}
+    private Stream GetOutputStream(HttpContext context)
+    {
+        string acceptEncoding;
+        if ((acceptEncoding = context.Request.Headers["Accept-Encoding"]) != null && acceptEncoding.Contains("gzip"))
+        {
+            context.Response.Headers.Add("Content-Encoding", "gzip");
+            return new GZipStream(context.Response.Body, CompressionMode.Compress);
+        }
+        return context.Response.Body;
+    }
 }

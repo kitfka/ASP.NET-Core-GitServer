@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace GitServer.Services
+namespace GitServer.Services;
+
+public class GitException : Exception
 {
-	public class GitException : Exception
-    {
-		public GitException(string message, Exception innerException)
-			: base(message, innerException)
-		{ }
-    }
+    public GitException(string message, Exception innerException)
+        : base(message, innerException)
+    { }
 }

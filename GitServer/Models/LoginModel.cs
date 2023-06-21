@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GitServer.Models
+namespace GitServer.Models;
+
+public class LoginModel
 {
-	public class LoginModel
-    {
-		[Required]
-		public string Username { get; set; }
-		[Required]
-		[DataType(DataType.Password)]
-		public string Password { get; set; }
-		public bool RememberMe { get; set; }
-    }
+    [Required]
+    public string Username { get; set; }
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+    public bool RememberMe { get; set; }
 }

@@ -6,7 +6,7 @@
     string currId = (string)ViewContext.RouteData.Values["id"];
     var request = ViewContext.HttpContext.Request;
     var giturl = $"{request.Scheme}://{request.Host}/{currUser}/{currRepo}.git";
-    string defaultBranch = GitServer.Constants.DefaultBranch;
+    string defaultBranch = GitServer.Constants.Constants.DefaultBranch;
 }
 <div class="ui clearing segment">
     <h3 class="ui left floated header">@currUser / @currRepo</h3>

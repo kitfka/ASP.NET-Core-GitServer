@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿namespace GitServer.Constants;
 
-namespace GitServer
+public class Constants
 {
-    public class Constants
-    {
-        public const string DefaultCulture = "en";
-        public const string DefaultBranch = "main";
-    }
+    public const string DefaultCulture = "en";
+    public const string DefaultBranch = "main";
 }

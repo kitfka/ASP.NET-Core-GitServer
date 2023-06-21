@@ -1,8 +1,7 @@
-﻿namespace GitServer.Settings
+﻿namespace GitServer.Settings;
+
+public class GitSettings
 {
-	public class GitSettings
-    {
-		public string BasePath { get; set; }
-		public string GitPath { get; set; }
-    }
+    public string BasePath { get; set; }
+    public string GitPath { get; set; }
 }
