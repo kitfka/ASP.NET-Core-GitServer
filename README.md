@@ -1,5 +1,15 @@
 ﻿# GitServer
 
+## Fork
+
+The base of this was this fork: https://github.com/kitfka/ASP.NET-Core-GitServer-fork
+
+Why this repo instead of a fork?
+I am going to change a lot of code. (remove most of the js code) soo yeah.
+
+
+## Overview
+
 Own ASP.NET Core 5.0 Git HTTP Server
 
 Setting
@@ -28,6 +38,8 @@ Need to install [Git](https://git-scm.com/) first, and make sure the git command
 - User support for repositories
 
 ## Development
+
+This is all the old stuff. it will be fine!
 
 `git clone https://github.com/InfDev/GitServer.git`
 
