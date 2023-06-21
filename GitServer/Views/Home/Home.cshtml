@@ -4,23 +4,32 @@
     ViewBag.Title = "Home";
 }
 
-<div class="w3-card-4 w3-margin">
+<div class="w3-card-4 w3-margin w3-animate-top">
     <header class="w3-container w3-theme w3-padding">
         <h1 class="">Repositories</h1>
     </header>
-    <a href="/Home/Create" class="w3-button w3-theme">+</a> New Repo.
-    <div class="w3-container">
-        @foreach (var repo in Model)
-        {
-            <hr class="w3-clear">
-            
-            @Html.RouteLink(repo.Name, "GetRepositoryHomeView", new { userName = repo.UserName, repoName = repo.Name }, new { @class = "w3-text-theme" })
+
+</div>
+<a href="/Home/Create" class=" w3-margin w3-round-large w3-button w3-large w3-theme-action">New+</a>
+<br />
+<br />
+<br />
+@foreach (var repo in Model)
+{
+    <div class="w3-card-4 w3-margin w3-animate-bottom">
+        <header class="w3-container w3-theme w3-padding">
+            <h1 class="">@repo.Name</h1>
+        </header>
+        <div class="w3-container">
             <p class="">@repo.Description</p>
             <p class="">Updated @repo.UpdateTime, created @repo.CreationDate</p>
-        }
+            @Html.RouteLink(repo.Name, "GetRepositoryHomeView", new { userName = repo.UserName, repoName = repo.Name }, new { @class = "w3-btn w3-theme-action w3-padding" })
+            <br />
+            <br />
+        </div>
     </div>
-</div>
 
+}
 
 @*
 <h2 class="ui header">Repositories</h2>
