@@ -33,12 +33,24 @@
             </small>
         </h3>
 
-        <div class="">
-            <button class="ui basic clone button blue" id="repo-clone-https" data-link="@giturl">
-                HTTP
-            </button>
-            <input id="inputGitUrl" type="text" value="@giturl" readonly>
-            <button onclick="copyLink();" id="btnCopyToClipboard" class="ui teal right labeled icon button"><i class="copy icon"></i> Copy</button>
+        <div class="w3-row">
+
+            <div class="w3-col w3-left" style="width:75px;">
+                <button class="w3-btn w3-border" style="width:75px;" id="repo-clone-https" data-link="@giturl">
+                    HTTP
+                </button>
+            </div>
+            <div class="w3-col w3-right" style="width:75px">
+                <button onclick="copyLink();"  id="btnCopyToClipboard" class="w3-btn w3-border"><i class="copy icon"></i> Copy</button>
+            </div>
+
+            <div class="w3-rest">
+                <input class="w3-input w3-border " id="inputGitUrl" type="text" value="@giturl" readonly>
+            </div>
+            
+     @*       <div class="w3-rest">
+                <input type="text" class="w3-input w3-border w3-rest" value="@giturl" id="inputGitUrl" readonly>
+            </div>*@
         </div>
 
         <hr class="w3-clear">
