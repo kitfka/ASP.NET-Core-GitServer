@@ -91,21 +91,31 @@
         }
     </table>
 
+    <br />
     @if (hasReadMe)
     {
-        <br />
 
         <div class="w3-card-0 w3-border">
             <header class="w3-container w3-theme w3-padding">
-                <h4 class="">readme</h4>
+                <h4 class="">README.md</h4>
             </header>
             <div class="w3-container">@Markdown.ParseHtmlString(readmeText)</div>
         </div>
 
-        <br />
-        <br />
-        <br />
+    } 
+    else
+    {
+        <div class="w3-card-0 w3-border">
+            <header class="w3-container w3-theme w3-padding">
+                <h4 class="">readme</h4>
+            </header>
+            <div class="w3-container w3-padding">Add a readme.md file!</div>
+        </div>
     }
+    <br />
+    <br />
+    <br />
+
 </div>
        
 @*bool isTree = fvm.Type == ObjectType.Tree;

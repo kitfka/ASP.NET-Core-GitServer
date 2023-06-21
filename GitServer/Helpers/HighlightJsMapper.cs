@@ -67,7 +67,7 @@ public class HighlightJsMapper : IHighlightJsMapper
 
     public ExtensionHljsClassItem Map(string fileExtension)
     {
-        ExtensionHljsClassItem extClassItem = null;
+        ExtensionHljsClassItem extClassItem;
         _dictionary.TryGetValue(fileExtension, out extClassItem);
         return extClassItem;
     }
