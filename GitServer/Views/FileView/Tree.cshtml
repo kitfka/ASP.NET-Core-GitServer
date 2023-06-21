@@ -1,5 +1,6 @@
 ﻿@using GitServer.Extensions
 @using GitServer.Models
+@using Westwind.AspNetCore.Markdown;
 @using LibGit2Sharp
 @model TreeModel
 @{
@@ -12,6 +13,8 @@
     var giturl = $"{request.Scheme}://{request.Host}/{currUser}/{currRepo}.git";
     var repo = Model.Repository;
     var lastcommit = repo.Commits.FirstOrDefault();
+    bool hasReadMe = GitServer.Helpers.AnotherHelper.ContainsReadMe(repo);
+    string readmeText = GitServer.Helpers.AnotherHelper.GetReadMe(repo);
 }
 
 
@@ -68,7 +71,7 @@
             {
                 
             <tr>
-                <td class=""><a href="@Url.UnencodedRouteLink("GetTreeView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name /</a></td>
+                <td class=""><a href="@Url.UnencodedRouteLink("GetTreeView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name@("/")</a></td>
                 <td>@GitServer.Helpers.AnotherHelper.GetMessage(repo, fvm)</td>
                 <td class="w3-right-align">@GitServer.Helpers.AnotherHelper.GetTimeStamp(repo, fvm)</td>
             </tr>
@@ -87,6 +90,22 @@
             }
         }
     </table>
+
+    @if (hasReadMe)
+    {
+        <br />
+
+        <div class="w3-card-0 w3-border">
+            <header class="w3-container w3-theme w3-padding">
+                <h4 class="">readme</h4>
+            </header>
+            <div class="w3-container">@Markdown.ParseHtmlString(readmeText)</div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+    }
 </div>
        
 @*bool isTree = fvm.Type == ObjectType.Tree;

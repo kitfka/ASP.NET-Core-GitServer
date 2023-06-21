@@ -2,6 +2,7 @@
 using LibGit2Sharp;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 
 namespace GitServer.Helpers;
 
@@ -70,6 +71,43 @@ public static class AnotherHelper
         return null;
     }
 
+
+    public static string GetReadMe(LibGit2Sharp.Repository repo)
+    {
+        foreach (var item in repo.Branches[Constants.Constants.DefaultBranch].Tip.Tree)
+        {
+            if (item.TargetType == TreeEntryTargetType.Blob)
+            {
+                if (ValidReadme(item.Name))
+                {
+                    return item.Target.Peel<Blob>().GetContentText();
+                }
+            }
+        }
+        return "";
+    }
+    public static bool ContainsReadMe(LibGit2Sharp.Repository repo)
+    {
+        foreach (var item in repo.Branches[Constants.Constants.DefaultBranch].Tip.Tree)
+        {
+            if (item.TargetType == TreeEntryTargetType.Blob)
+            {
+                if (ValidReadme(item.Name))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    
+    private static bool ValidReadme(string name)
+    {
+        string nn = name.ToLower();
+
+        return nn is "readme.md" or "readme.txt";
+    }
 
     public static IList<string> SpikePath(string path)
     {
