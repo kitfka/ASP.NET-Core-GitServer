@@ -40,13 +40,16 @@
 @*Tabs!*@
 <div class="w3-row">
     <a href="javascript:void(0)" onclick="openTab(event, 'Code');">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Code</div>
+        <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Code</div>
     </a>
     <a href="javascript:void(0)" onclick="openTab(event, 'Issues');">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Issues</div>
+        <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding">Issues</div>
     </a>
     <a href="javascript:void(0)" onclick="openTab(event, 'Pull');">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Pull Requests</div>
+        <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding">Pull Requests</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openTab(event, 'Settings');">
+        <div class="w3-quarter tablink w3-bottombar w3-hover-light-grey w3-padding">Settings</div>
     </a>
 </div>
 
@@ -141,7 +144,12 @@
     <p>Placeholder pull!</p>
 </div>
 
-
+<div id="Settings" class="w3-container tab" style="display:none">
+    <h2>Settings</h2>
+    <p>
+        Message: @Model.Repository.Info.Message
+    </p>
+</div>
 
 
 @section Scripts {

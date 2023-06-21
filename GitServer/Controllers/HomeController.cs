@@ -46,9 +46,9 @@ public class HomeController : GitControllerBase
         var username = HttpContext.User.Identity.Name;
         var reps = _repository.List(r => r.UserName == username).ToList();
         if (reps.Count > 9)
-            return View(new { error = "已超过10个限制" });
+            return View(new { error = "To many repo's" });
         if (reps.Exists(r => r.Name == name))
-            return View(new { error = "已存在仓库" });
+            return View(new { error = "This repository already exists!" });
         if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(remoteurl))
         {
             result = RepositoryService.CreateRepository(Path.Combine(username, name));

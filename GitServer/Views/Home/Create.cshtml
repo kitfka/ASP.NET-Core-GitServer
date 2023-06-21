@@ -5,9 +5,11 @@
 
 @if (Model != null)
 {
-    <div class="ui negative message">
-        <i class="close icon"></i>
-        <div class="header">@Model</div>
+    <div class="w3-panel w3-red w3-display-container">
+        <span onclick="this.parentElement.style.display='none'"
+              class="w3-button w3-display-topright">X</span>
+        <h3>Warning!</h3>
+        <p>@Model</p>
     </div>
 }
 
