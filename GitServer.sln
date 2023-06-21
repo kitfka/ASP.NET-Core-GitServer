@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitServer", "GitServer\GitServer.csproj", "{E723D163-17E9-4526-BD79-867C6F32D255}"
 EndProject
@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitServer.ApplicationCore", "GitServer.ApplicationCore\GitServer.ApplicationCore.csproj", "{6DC1DDFE-4EFE-44BF-98F2-BD92C2F1CC9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitServer.ApplicationCore", "GitServer.ApplicationCore\GitServer.ApplicationCore.csproj", "{6DC1DDFE-4EFE-44BF-98F2-BD92C2F1CC9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitServer.Infrastructure", "GitServer.Infrastructure\GitServer.Infrastructure.csproj", "{27F49596-2EF5-4B05-A3F9-D6CACB6E581F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitServer.Infrastructure", "GitServer.Infrastructure\GitServer.Infrastructure.csproj", "{27F49596-2EF5-4B05-A3F9-D6CACB6E581F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitServer.Test", "GitServer.Test\GitServer.Test.csproj", "{B6B07E6E-5A0B-4C35-9ED0-581B992A3006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{27F49596-2EF5-4B05-A3F9-D6CACB6E581F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27F49596-2EF5-4B05-A3F9-D6CACB6E581F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27F49596-2EF5-4B05-A3F9-D6CACB6E581F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B07E6E-5A0B-4C35-9ED0-581B992A3006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B07E6E-5A0B-4C35-9ED0-581B992A3006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B07E6E-5A0B-4C35-9ED0-581B992A3006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B07E6E-5A0B-4C35-9ED0-581B992A3006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
