@@ -106,8 +106,8 @@ function images() {
 
 function extLibs() {
 	app.addExtLibAsIs("./assets/lib/jquery/dist/**/*", "./wwwroot/lib/jquery/dist/");
-	app.addExtLibAsIs("./assets/lib/semantic/dist/*", "./wwwroot/lib/semantic/dist/");
-	app.addExtLibAsIs("./assets/lib/semantic/dist/themes/default/**/*", "./wwwroot/lib/semantic/dist/themes/default/");
+	//app.addExtLibAsIs("./assets/lib/semantic/dist/*", "./wwwroot/lib/semantic/dist/");
+	//app.addExtLibAsIs("./assets/lib/semantic/dist/themes/default/**/*", "./wwwroot/lib/semantic/dist/themes/default/");
 	app.addExtLibAsIs("./assets/lib/highlightjs/*", "./wwwroot/lib/highlightjs/");	
 	app.addExtLibAsIs("./assets/lib/highlightjs/styles/foundation.css", "./wwwroot/lib/highlightjs/styles/");	
 	app.addExtLibAsIs("./assets/lib/highlightjs/styles/github.css", "./wwwroot/lib/highlightjs/styles/");	

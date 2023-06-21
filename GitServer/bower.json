@@ -16,7 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "semantic": "semantic-ui#^2.4.1",
 	"highlightjs-line-numbers": "highlightjs-line-numbers.js#^2.6.0"
   }
 }
