@@ -6,20 +6,26 @@
 
   <ItemGroup>
     <Compile Remove="lib\**" />
+    <Compile Remove="wwwroot\js\highlight\**" />
     <Content Remove="lib\**" />
+    <Content Remove="wwwroot\js\highlight\**" />
     <EmbeddedResource Remove="lib\**" />
+    <EmbeddedResource Remove="wwwroot\js\highlight\**" />
     <None Remove="lib\**" />
+    <None Remove="wwwroot\js\highlight\**" />
+    <TypeScriptCompile Remove="wwwroot\js\highlight\**" />
   </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="LibGit2Sharp" Version="0.27.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
 	<PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.6.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\js\highlight\highlight.pack.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitServer.Infrastructure\GitServer.Infrastructure.csproj" />
