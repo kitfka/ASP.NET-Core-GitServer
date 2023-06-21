@@ -8,51 +8,60 @@
     var giturl = $"{request.Scheme}://{request.Host}/{currUser}/{currRepo}.git";
     string defaultBranch = GitServer.Constants.Constants.DefaultBranch;
 }
-<div class="ui clearing segment">
-    <h3 class="ui left floated header">@currUser / @currRepo</h3>
+
+
+<div class="w3-card-4 w3-margin">
+    <header class="w3-container w3-theme w3-padding">
+        <h1 class="">@currUser / @currRepo</h1>
+    </header>
+
+ @*   <div class="w3-container">
+        
+    </div>*@
 </div>
-<div class="ui container">
-    <div class="ui grid">
-        <div class="sixteen wide column content">
-            <h4 class="ui top attached header">
-                Quick help
-            </h4>
-            <div class="ui attached guide table segment">
-                <div class="item">
-                    <h3>Clone the current repository <small>Don't know how to do it? <a href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository" target="_blank" rel="nofollow">Here</a> view help！</small></h3>
-                    <div class="ui fluid action small input">
-                        <button class="ui basic clone button blue" id="repo-clone-https" data-link="@giturl">
-                            HTTP
-                        </button>
-                        <input id="inputGitUrl" type="text" value="@giturl" readonly>
-                        <button id="btnCopyToClipboard" class="ui teal right labeled icon button"><i class="copy icon"></i> Copy</button>
-                    </div>
-                    <br />
-                    <div class="markdown">
-                        <h3>Clone the project to the local repository in the folder of your projects</h3>
-                        <pre><code>git clone @giturl
+
+<div class="w3-card-4 w3-margin">
+    <header class="w3-container w3-theme w3-padding">
+        <h4 class="">Quick help</h4>
+    </header>
+
+    <div class="w3-container w3-padding">
+        <h3>
+            Clone the current repository <small>
+                Don't know how to do it?
+                <a href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository" target="_blank" rel="nofollow">Here</a> view help！
+            </small>
+        </h3>
+
+        <div class="">
+            <button class="ui basic clone button blue" id="repo-clone-https" data-link="@giturl">
+                HTTP
+            </button>
+            <input id="inputGitUrl" type="text" value="@giturl" readonly>
+            <button onclick="copyLink();" id="btnCopyToClipboard" class="ui teal right labeled icon button"><i class="copy icon"></i> Copy</button>
+        </div>
+
+        <hr class="w3-clear">
+        <h4 class="">Clone the project to the local repository in the folder of your projects</h4>
+        <div class="markdown">
+
+            <pre><code>git clone @giturl
 cd @currRepo
 git remote -v
 git status</code></pre>
-                    </div>
-                </div>
-                <div class="ui divider"></div>
-
-                <div class="item">
-                    <h3>Create a new local repository and link with the repository on the server</h3>
-                    <div class="markdown">
-                        <pre><code>git init
+        </div>
+        <hr class="w3-clear">
+        <h4 class="">Create a new local repository and link with the repository on the server</h4>
+        <div class="markdown">
+            <pre><code>git init
 git remote add origin <span class="clone-url">@giturl</span>
 git remote -v
 </code></pre>
-                    </div>
-                </div>
-                <div class="ui divider"></div>
-
-                <div class="item">
-                    <h3>Add files to local repository and push to remote repository</h3>
-                    <div class="markdown">
-                        <pre><code>ren > README.md
+        </div>
+        <hr class="w3-clear">
+        <h4 class="">Add files to local repository and push to remote repository</h4>
+        <div class="markdown">
+            <pre><code>ren > README.md
 git status
 git add README.md
 git status
@@ -60,23 +69,18 @@ git commit -m "first commit"
 git status
 git push -u origin @defaultBranch
 git status</code></pre>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
 <script>
-    function gitUrlToClipboard() {
-        const copyText = document.getElementById("inputGitUrl");
-        copyText.select();
-        document.execCommand("copy");
-    }
 
-    $(function () {
-        const el = document.getElementById("btnCopyToClipboard");
-        el.addEventListener("click", gitUrlToClipboard, false);
-    });
+
+        function copyLink() {
+            const copyText = document.getElementById("inputGitUrl");
+            copyText.select();
+            document.execCommand("copy");
+        }
 </script>
 }

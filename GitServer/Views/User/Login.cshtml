@@ -5,7 +5,33 @@
     ViewBag.Title = "Login";
 }
 
-<div class="user signin">
+<div class="w3-card-4">
+    <div class="w3-container w3-theme">
+        <h2>Input Colors</h2>
+    </div>
+    <form class="w3-container" asp-action="Login" method="post">
+        <p>
+            <label class="w3-text-brown"><b>Username</b></label>
+            <input class="w3-input w3-border w3-sand" id="user_name" name="Username" value="" autofocus required>
+        </p>
+
+        <p>
+            <label class="w3-text-brown"><b>Password</b></label>
+            <input class="w3-input w3-border w3-sand" id="password" name="Password" type="password" value="" required>
+            @*<span asp-validation-for="Password" class="text-danger"></span>*@
+        </p>
+        <p>
+            <label>Remember me</label>
+            <input name="remember" type="checkbox">
+        </p>
+        <p>
+            <button class="w3-btn w3-brown">Sign in</button>
+            <a href="/User/Register">Sign up</a>
+        </p>
+    </form>
+</div>
+
+@*<div class="user signin">
     <div class="ui middle very relaxed page grid">
         <div class="column">
             <form class="ui form" asp-action="Login" method="post">
@@ -39,3 +65,4 @@
         </div>
     </div>
 </div>
+*@

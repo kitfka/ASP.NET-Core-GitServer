@@ -1,59 +1,62 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewBag.Title - GitServer</title>
     <meta charset="utf-8" />
-    <link href="~/lib/semantic/dist/semantic.min.css" rel="stylesheet" />
+    @*<link href="~/lib/semantic/dist/semantic.min.css" rel="stylesheet" />*@
     <link rel="stylesheet" type="text/css" href="~/css/main.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
     <link rel="shortcut icon" href="/img/favicon.ico" />
 </head>
 <body>
-    <div class="full height">
-        <noscript>Please enable JavaScript in your browser!</noscript>
-        <div class="following bar light">
-            <div class="ui container">
-                <div class="ui grid">
-                    <div class="column">
-                        <div class="ui top secondary menu">
-                            <a class="item brand" href="/">
-                                <img src="/img/logo_white.svg" alt="GitServer" class="logo-image" />
-                            </a>
-                            <a class="item" href="/">Home</a>
-                            <a class="item" href="#">Explore</a>
-                            <div class="right menu">
-                                @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
-                                {
-                                    <a class="item" href="#">@ViewContext.HttpContext.User.Identity.Name</a>
-                                    <a class="item" href="/User/Signout">Sign out</a>
-                                }
-                                else
-                                {
-                                    <a class="item" href="/User/Login">Sign in</a>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui container dashboard">
-            @RenderBody()
-        </div>
+    <div class="">
     </div>
-    <footer>
-        <div class="ui container">
-            <div class="ui left">
-                InfDev © 2019 GitServer 0.2
-            </div>
-            <div class="ui right links">
-                <a target="_blank" href="https://github.com/InfDev/GitServer">InfDev/GitHub</a>
-            </div>
+    <noscript>Please enable JavaScript in your browser!</noscript>
+    <div class="w3-top w3-bar w3-theme">
+        <div class="w3-bar-item">
+            @*FIXME: This seems to be a bit of a hack... To Bad!*@
+            <img src="/img/logo_white.svg" alt="GitServer" style="height:23px;width:23px" />
+        </div>
+        <a href="/" class="w3-bar-item w3-button">Home</a>
+        @*<a href="#about" class="w3-bar-item w3-button">Explore</a>*@
+
+        @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+        {
+            <a class="w3-bar-item w3-button w3-right" href="/User/Signout">Sign out</a>
+            <a class="w3-bar-item w3-button w3-right" href="#">@ViewContext.HttpContext.User.Identity.Name</a>
+        }
+        else
+        {
+            <a class="w3-bar-item w3-button w3-right" href="/User/Login">Sign in</a>
+        }
+    </div>
+    <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+        @RenderBody()
+    </div>
+    
+    <footer class="w3-theme w3-bottom w3-row" style="height:50px;">
+@*        <div class="w3-col w3-rest">
+            Kitfka © 2023 GitServer 0.3
+        </div>
+        <div class="w3-right" style="width:75px">
+            <a target="_blank" href="https://github.com/kitfka/ASP.NET-Core-GitServer/tree/main">Kitfka/GitHub</a>
+        </div>*@
+        <div class="w3-col w3-right" style="width:150px">
+            <p>
+                <a target="_blank" href="https://github.com/kitfka/ASP.NET-Core-GitServer/tree/main">Kitfka/GitHub</a>
+            </p>
+        </div>
+        <div class="w3-rest" style="padding-left: 16px;">
+            <p>
+                Kitfka © 2023 GitServer 0.3
+            </p>
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery-3.6.0.min.js"></script>
-    <script src="~/lib/semantic/dist/semantic.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery-3.6.0.min.js"></script>*@
+    @*  <script src="~/lib/semantic/dist/semantic.min.js"></script>*@
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -13,59 +13,101 @@
     var repo = Model.Repository;
     var lastcommit = repo.Commits.FirstOrDefault();
 }
-<div class="ui clearing segment">
-    <h3 class="ui left floated header">@currUser / @currRepo</h3>
-    @*<h4 class="ui left floated header">@repo.Branches</h4>*@
-</div>
-<h2>Contents of @Model.Name</h2>
-<div class="ui fluid action input">
-    <input type="text" value="@giturl" readonly>
-    <button class="ui teal right labeled icon button"><i class="copy icon"></i> Copy </button>
-</div>
-<div class="ui segment" id="git-stats">
-    <div class="ui two horizontal center link list">
-        <div class="item">
-            <a href="#"><span class="ui text black"><i class="icon git"></i><b>@repo.Branches.Count()</b> branches</span> </a>
+
+
+<div class="w3-card-0 w3-border">
+    <header class="w3-container w3-theme w3-padding">
+        <h4 class="">@currUser / @currRepo</h4>
+    </header>
+    <div class="w3-row">
+        <div class="w3-col w3-right" style="width:75px">
+            <button class="w3-col w3-button" onclick="copyLink();" style="width:75px"> Copy </button>
         </div>
-        <div class="item">
-            <a href="#"><span class="ui text black"><i class="icon history"></i> <b>@repo.Commits.Count()</b> commits</span> </a>
-        </div>
-        <div class="item">
-            <a href="#"><span class="ui text black"><i class="icon tag"></i> <b>0</b> releases</span> </a>
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border w3-rest" value="@giturl" id="inputGitUrl" readonly>
         </div>
     </div>
 </div>
-<div class="ui top attached tabular menu">
-    <a class="item active" data-tab="code">Code</a>
-    <a class="item" data-tab="issues">Issues</a>
-    <a class="item" data-tab="pull">Pull requests</a>
+<br />
+@*Tabs!*@
+<div class="w3-row">
+    <a href="javascript:void(0)" onclick="openTab(event, 'Code');">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Code</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openTab(event, 'Issues');">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Issues</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openTab(event, 'Pull');">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Pull Requests</div>
+    </a>
 </div>
-<table class="ui celled striped table">
-    <thead>
+
+
+<div id="Code" class="tab">
+
+    <br />
+    <table class="w3-table-all">
         <tr>
-            <th colspan="3">@lastcommit.Author.Name &nbsp;&nbsp;<span class="ui label">@lastcommit.Message</span></th>
+            <th>@lastcommit.Author.Name: @lastcommit.Message</th>
+            <th></th>
+            <th class="w3-right-align">Branches: @repo.Branches.Count() Commits: @repo.Commits.Count() Releases: N/A</th>
         </tr>
-    </thead>
-    <tbody>
+        
         @if (Model.Parent != null)
         {
             <tr>
                 <td class="collapsing"><i class="folder icon"></i><a href="@Url.UnencodedRouteLink("GetTreeView", new { repoName = currRepo, id = currId, path = Model.Parent })">..</a></td>
-                <td>Initial commit</td>
-                @*FIXME: Dit is niet correct!*@
-                <td class="right aligned collapsing">10 hours ago!</td>
+                <td></td>
+                <td class="w3-right-align"></td>
             </tr>
         }
         @foreach (FileViewModel fvm in Model.Children)
         {
             bool isTree = fvm.Type == ObjectType.Tree;
             <tr>
-                <td class="collapsing"><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "GetTreeView" : "GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name</a></td>
-                @*<td>@lastcommit.MessageShort</td>*@
+                <td class=""><i class="@((isTree) ? "folder" : "file outline") icon"></i><a href="@Url.UnencodedRouteLink((isTree) ? "GetTreeView" : "GetBlobView", new { repoName = currRepo, id = currId, path = fvm.Path })">@fvm.Name</a></td>
                 <td>@GitServer.Helpers.AnotherHelper.GetMessage(repo, fvm)</td>
-                @*<td class="right aligned collapsing">@lastcommit.Committer.When.ToString("yyyy-MM-dd HH:mm:ss")</td>*@
-                <td class="right aligned collapsing">@GitServer.Helpers.AnotherHelper.GetTimeStamp(repo, fvm)</td>
+                <td class="w3-right-align">@GitServer.Helpers.AnotherHelper.GetTimeStamp(repo, fvm)</td>
             </tr>
         }
-    </tbody>
-</table>
+    </table>
+</div>
+
+
+<div id="Issues" class="w3-container tab" style="display:none">
+    <h2>Issues</h2>
+    <p>Placeholder!</p>
+</div>
+
+
+<div id="Pull" class="w3-container tab" style="display:none">
+    <h2>Pull</h2>
+    <p>Placeholder pull!</p>
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        function openTab(evt, tapName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("tab");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+            }
+            document.getElementById(tapName).style.display = "block";
+            evt.currentTarget.firstElementChild.className += " w3-border-red";
+        }
+
+        function copyLink() {
+            const copyText = document.getElementById("inputGitUrl");
+            copyText.select();
+            document.execCommand("copy");
+        }
+    </script>
+}

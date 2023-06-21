@@ -3,40 +3,44 @@
 *@
 @model GitServer.Models.RegisterModel
 @{
-    ViewBag.Title = "注册";
+    ViewBag.Title = "Register";
 }
-<div class="user signin">
-    <div class="ui middle very relaxed page grid">
-        <div class="column">
-            <form class="ui form" asp-action="Register" method="post">
-                <h3 class="ui top attached header">
-                   Sign up
-                </h3>
-                <div class="ui attached segment">
-                    <div class="required inline field ">
-                        <label for="Username">Username</label>
-                        <input id="Username" name="Username" value="" autofocus required>
-                    </div>
-                    <div class="required inline field ">
-                        <label for="user_email">Email</label>
-                        <input id="user_email" name="Email" value="" autofocus required>
-                    </div>
-                    <div class="required inline field ">
-                        <label for="password">Password</label>
-                        <input id="password" name="Password" type="password" value="" placeholder="At least 8 digits" required>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="required inline field ">
-                        <label for="ConfirmPassword">Confirm password</label>
-                        <input id="ConfirmPassword" name="ConfirmPassword" type="password" value="" placeholder="At least 8 digits" required>
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="inline field">
-                        <label></label>
-                        <button class="ui teal button">To register</button>
-</div>
-                </div>
-            </form>
+@*<form class="w3-container w3-card-4 w3-theme w3-margin">
+    <h2 class="w3-center">Sign up</h2>
+
+    <div class="w3-row w3-section">
+        <label class="w3-col">Username</label>
+        <div class="w3-col">
+            <input class="w3-input w3-border" name="first" type="text" placeholder="First Name">
         </div>
     </div>
+</form>*@
+
+<div class="w3-card-4">
+    <div class="w3-container w3-theme">
+        <h2>Input Colors</h2>
+    </div>
+    <form class="w3-container" asp-action="Register" method="post">
+        <p>
+            <label class="w3-text-brown"><b>Username</b></label>
+            <input class="w3-input w3-border w3-sand" name="first" type="text">
+        </p>
+        <p>
+            <label class="w3-text-brown"><b>Email</b></label>
+            <input class="w3-input w3-border w3-sand" name="last" type="text">
+        </p>
+        <p>
+            <label class="w3-text-brown"><b>Password</b></label>
+            <input class="w3-input w3-border w3-sand" id="password" name="Password" type="password" value="" placeholder="At least 8 digits" required>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </p>
+        <p>
+            <label class="w3-text-brown"><b>Confirm password</b></label>
+            <input class="w3-input w3-border w3-sand" id="ConfirmPassword" name="ConfirmPassword" type="password" value="" placeholder="At least 8 digits" required>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </p>
+        <p>
+            <button class="w3-btn w3-brown">Register</button>
+        </p>
+    </form>
 </div>
