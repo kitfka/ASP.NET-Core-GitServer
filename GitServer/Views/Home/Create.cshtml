@@ -3,7 +3,6 @@
     ViewData["Title"] = "New repository";
 }
 
-<h2 class="ui header">New repository</h2>
 @if (Model != null)
 {
     <div class="ui negative message">
@@ -11,21 +10,27 @@
         <div class="header">@Model</div>
     </div>
 }
-<div>
-    <form asp-route="Create" method="post" class="ui form">
-        <div class="field">
-            <label>Repository name</label>
-            <input type="text" name="name" placeholder="Repository name is required" required autofocus>
-        </div>
-        <div class="field">
-            <label>Repository description</label>
-            <input type="text" name="description" placeholder="Repository description is required">
-        </div>
-        <div class="field">
-            <label>Remote address</label>
-            <input type="text" name="remoteurl" placeholder="The remote repository address to be Clone, not required">
-        </div>
-        <button class="ui button" type="submit">Create</button>
+
+<div class="w3-card-2">
+    <div class="w3-container w3-theme">
+        <h2>New repository</h2>
+    </div>
+    <form class="w3-container w3-text-theme" asp-route="Create" method="post">
+        <p>
+            <label class=""><b>Repository name</b></label>
+            <input class="w3-input w3-border w3-sand" type="text" name="name" placeholder="Repository name is required" required autofocus>
+        </p>
+        <p>
+            <label class=""><b>Repository description</b></label>
+            <input class="w3-input w3-border w3-sand" type="text" name="description" placeholder="Repository description is required">
+        </p>
+        <p>
+            <label class=""><b>Remote address</b></label>
+            <input class="w3-input w3-border" type="text" name="remoteurl" placeholder="The remote repository address to be Clone, not required">
+        </p>
+
+        <button class="w3-btn w3-theme" type="submit">Create</button>
+        <br />
+        <br />
     </form>
 </div>
-
