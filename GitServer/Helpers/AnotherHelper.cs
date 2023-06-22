@@ -1,6 +1,8 @@
 ﻿using GitServer.Models;
+using static GitServer.Constants.Constants;
 using LibGit2Sharp;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
@@ -74,7 +76,12 @@ public static class AnotherHelper
 
     public static string GetReadMe(LibGit2Sharp.Repository repo)
     {
-        foreach (var item in repo.Branches[Constants.Constants.DefaultBranch].Tip.Tree)
+        if (!repo.Branches.Where(x => x.FriendlyName == DefaultBranch).Any())
+        {
+            // The default branch is not here. Must be an old repo!
+            return "";
+        }
+        foreach (var item in repo.Branches[DefaultBranch].Tip.Tree)
         {
             if (item.TargetType == TreeEntryTargetType.Blob)
             {
@@ -88,6 +95,11 @@ public static class AnotherHelper
     }
     public static bool ContainsReadMe(LibGit2Sharp.Repository repo)
     {
+        if (!repo.Branches.Where(x => x.FriendlyName == Constants.Constants.DefaultBranch).Any())
+        {
+            // The default branch is not here. Must be an old repo!
+            return false;
+        }
         foreach (var item in repo.Branches[Constants.Constants.DefaultBranch].Tip.Tree)
         {
             if (item.TargetType == TreeEntryTargetType.Blob)

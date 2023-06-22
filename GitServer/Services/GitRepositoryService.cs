@@ -76,6 +76,7 @@ public class GitRepositoryService : GitServiceBase
         }
     }
 
+    public void DeleteRepository(string username, string reponame) => DeleteRepository(Path.Combine(username, reponame));
     public void DeleteRepository(string name)
     {
         Exception e = null;

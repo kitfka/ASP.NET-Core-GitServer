@@ -27,9 +27,9 @@
     <header class="w3-container w3-theme w3-padding">
         <h4 class="">@currUser / @currRepo</h4>
     </header>
-    <div class="w3-row">
+    <div class="w3-row w3-container w3-padding-16">
         <div class="w3-col w3-right" style="width:75px">
-            <button class="w3-col w3-button" onclick="copyLink();" style="width:75px"> Copy </button>
+            <button class="w3-col w3-button w3-border" onclick="copyLink();" style="width:75px"> Copy </button>
         </div>
         <div class="w3-rest">
             <input type="text" class="w3-input w3-border w3-rest" value="@giturl" id="inputGitUrl" readonly>
@@ -150,6 +150,10 @@
     <p>
         Message: @Model.Repository.Info.Message
     </p>
+    <form action="/Home/Delete" method="post">
+        <input type="hidden" name="name" value="@currRepo" />
+        <button type="submit" class="w3-button w3-red">Delete Repository</button>
+    </form>
 </div>
 
 

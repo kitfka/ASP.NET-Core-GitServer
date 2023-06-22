@@ -65,7 +65,7 @@ public class HomeController : GitControllerBase
                 Name = name,
                 Description = description,
                 CreationDate = DateTime.Now,
-                DefaultBranch = "master",
+                DefaultBranch = GitServer.Constants.Constants.DefaultBranch,
                 UserName = username,
                 UpdateTime = DateTime.Now
             };
@@ -73,5 +73,21 @@ public class HomeController : GitControllerBase
             return Redirect("/");
         }
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult Delete(string name)
+    {
+        name = name.Trim();
+        var username = HttpContext.User.Identity.Name;
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(name))
+        {
+            return Redirect("/");
+        }
+
+        RepositoryService.DeleteRepository(username, name);
+
+        return Redirect("/");
     }
 }
